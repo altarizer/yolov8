@@ -157,6 +157,7 @@ class LoadScreenshots:
 class LoadImages:
     # YOLOv8 image/video dataloader, i.e. `python detect.py --source image.jpg/vid.mp4`
     def __init__(self, path, imgsz=640, stride=32, auto=True, transforms=None, vid_stride=1):
+        self.sf = 2
         if isinstance(path, str) and Path(path).suffix == ".txt":  # *.txt file with img/vid/dir on each line
             path = Path(path).read_text().rsplit()
         files = []
@@ -183,7 +184,7 @@ class LoadImages:
         self.mode = 'image'
         self.auto = auto
         self.transforms = transforms  # optional
-        self.vid_stride = vid_stride  # video frame-rate stride
+        self.vid_stride = vid_stride*self.sf #vid_stride # video frame-rate stride
         if any(videos):
             self._new_video(videos[0])  # new video
         else:
@@ -215,9 +216,9 @@ class LoadImages:
                 self._new_video(path)
                 ret_val, im0 = self.cap.read()
 
-            self.frame += 1
+            self.frame += self.sf#1
             # im0 = self._cv2_rotate(im0)  # for use if cv2 autorotation is False
-            s = f'video {self.count + 1}/{self.nf} ({self.frame}/{self.frames}) {path}: '
+            s = f'video-sf {self.count + 1}/{self.nf} ({self.frame}/{self.frames}) {path}: '
 
         else:
             # Read image
