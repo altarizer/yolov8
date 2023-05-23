@@ -1,3 +1,10 @@
+it's the repo. of ultralytics' 15b3b0365ab2f12993a58985f3cb7f2137409a0c -th commit(yolov8) version. 
+
+if you will fetch by some mistaking, reset as below, 
+
+`git reset --hard 15b3b0365ab2f12993a58985f3cb7f2137409a0c`
+
+
 <div align="center">
   <p>
     <a align="center" href="https://ultralytics.com/yolov8" target="_blank">
